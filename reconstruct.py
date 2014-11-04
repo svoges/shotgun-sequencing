@@ -7,7 +7,8 @@ def create_graph(file):
     for read in reads:
         for node in reads:
             if read != node:
-                distance = overlap_distance(read, node)
+                x_index = max(0, len(read) - len(node))
+                distance = overlap_distance(read[x_index:], node)
                 graph.add_edge(read, node, weight=distance)
     return graph
 
@@ -19,13 +20,36 @@ def read_file(file):
     for line in contents:
         line = line.strip('\n')
         fragments.append(line)
-    print fragments
     if not fragments:
         print "File was not able to be read"
     return fragments
 
 def overlap_distance(x, y):
-    return distance
+    matched = False
+    x_index = max(0, len(x) - len(y))
+    x = x[x_index:]
+    while not matched:
+        if overlap(x, y):
+            return len(x)
+        else:
+            x = x[1:]
+            y = y[:-1]
+    return 0
+
+
+# Returns True if y is equal to the suffix of x
+def overlap(x, y):
+    x_index = max(0, len(x) - len(y))
+    if len(x) >= len(y):
+        if x[x_index:] == y:
+            return True
+        return False
+    else:
+        if x == y[:len(x)]:
+            return True
+        return False
+
+
 
 def print_nodes(graph):
     print graph.nodes()
