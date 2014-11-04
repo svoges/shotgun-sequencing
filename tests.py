@@ -108,56 +108,57 @@ def test12():
     print "test 12 passes"
 
 
-def reads_tester(read_file, answer_file):
+def reads_tester(read_file, answer_file, output_file):
     graph = code.create_graph(read_file)
-    superstring = code.assemble_greedy(graph)
+    superstring = code.assemble_greedy(graph, output_file)
     if answer_file:
-        answer = open(answer_file, 'r').read().strip("\n")
-        assert len(answer) == len(superstring)
-        assert answer == superstring
-    else:
-        print superstring
+        answer = open(answer_file).read()
+        output = open(output_file).read()
+        assert answer == output
+        # answer = open(answer_file, 'r').read().strip("\n")
+        # assert len(answer) == len(superstring)
+        # assert answer == superstring
 
 
 def test_reads1():
     print "Test 1"
-    reads_tester("Dataset/reads1.txt", "Dataset/answer1.txt")
+    reads_tester("Dataset/reads1.txt", "Dataset/answer1.txt", "Output/output1.txt")
 
 def test_reads2():
     print "Test 2"
-    reads_tester("Dataset/reads2.txt", "Dataset/answer2.txt")
+    reads_tester("Dataset/reads2.txt", "Dataset/answer2.txt", "Output/output2.txt")
 
 def test_reads3():
     print "Test 3"
-    reads_tester("Dataset/reads3.txt", "Dataset/answer3.txt")
+    reads_tester("Dataset/reads3.txt", "Dataset/answer3.txt", "Output/output3.txt")
 
 def test_reads4():
     print "Test 4"
-    reads_tester("Dataset/reads4.txt", "Dataset/answer4.txt")
+    reads_tester("Dataset/reads4.txt", "Dataset/answer4.txt", "Output/output4.txt")
 
 def test_reads5():
     print "Test 5"
-    reads_tester("Dataset/reads5.txt", "Dataset/answer5.txt")
+    reads_tester("Dataset/reads5.txt", "Dataset/answer5.txt", "Output/output5.txt")
 
 def test_reads6():
     print "Test 6"
-    reads_tester("Dataset/reads6.txt", "")
+    reads_tester("Dataset/reads6.txt", "", "Output/output6.txt")
 
 def test_reads7():
     print "Test 7"
-    reads_tester("Dataset/reads7.txt", "")
+    reads_tester("Dataset/reads7.txt", "", "Output/output7.txt")
 
 def test_reads8():
     print "Test 8"
-    reads_tester("Dataset/reads8.txt", "")
+    reads_tester("Dataset/reads8.txt", "", "Output/output8.txt")
 
 def test_reads9():
     print "Test 9"
-    reads_tester("Dataset/reads9.txt", "")
+    reads_tester("Dataset/reads9.txt", "", "Output/output9.txt")
 
 def test_reads10():
     print "Test 10"
-    reads_tester("Dataset/reads10.txt", "")
+    reads_tester("Dataset/reads10.txt", "", "Output/output10.txt")
 
 
 
