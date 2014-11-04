@@ -74,34 +74,34 @@ def test7():
     graph = code.create_graph("Tests/test_graph.txt")
     assert graph.number_of_edges() == 6
     assert graph.number_of_nodes() == 4
-    graph.graph()
+    print graph.out_edges(data=True)
 
 
 if __name__ == "__main__":
-    # # test to see if importing reconstruct works
-    # print "----Test 1----"
-    # test1()
-    #
-    # # test to see if python reads the file correctly
-    # print "----Test 2----"
-    # test2()
-    #
-    # # test to see if nodes are being added to the graph correctly
-    # print "----Test 3----"
-    # test3()
-    #
-    # # Test error checking in read_file
-    # print "---Test 4----"
-    # print "Should print 'File was not able to be read'"
-    # test4()
-    #
-    # # Test the overlap function in reconstruct
-    # print "----Test 5----"
-    # test5()
-    #
-    # # Test that the overlap_distance is correct
-    # print "----Test 6----"
-    # test6()
+    # test to see if importing reconstruct works
+    print "----Test 1----"
+    test1()
+
+    # test to see if python reads the file correctly
+    print "----Test 2----"
+    test2()
+
+    # test to see if nodes are being added to the graph correctly
+    print "----Test 3----"
+    test3()
+
+    # Test error checking in read_file
+    print "---Test 4----"
+    print "Should print 'File was not able to be read'"
+    test4()
+
+    # Test the overlap function in reconstruct
+    print "----Test 5----"
+    test5()
+
+    # Test that the overlap_distance is correct
+    print "----Test 6----"
+    test6()
     #
     # Test that the graph is correctly made
     print "----Test 7----"

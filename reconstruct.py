@@ -10,7 +10,8 @@ def create_graph(file):
                 x_index = max(0, len(read) - len(node))
                 distance = overlap_distance(read[x_index:], node)
                 if distance > 0:
-                    graph.add_edge(read, node, weight=distance)
+                    # graph.add_edge(read, node, weight=distance)
+                    graph.add_weighted_edges_from([(read, node, distance)])
     return graph
 
 
