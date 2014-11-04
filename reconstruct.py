@@ -54,7 +54,9 @@ def overlap(x, y):
 # returns the shortest common substring between all nodes
 def assemble_greedy(graph):
     while graph.number_of_nodes() > 1:
-        edge = sort_edges(graph)[0]
+        edge = sort_edges(graph)
+        if edge:
+            edge = edge[0]
         print "edge: " + str(edge) + "\n"
 
         first_vertex = edge[0]
@@ -112,10 +114,11 @@ def assemble_greedy(graph):
 
 # Returns the edge with the greatest weight
 def sort_edges(G):
-    return sorted(G.out_edges(data=True), key=lambda edge: edge[2]['weight'], reverse=True)
-
-def shortest_substring(x, y):
-    return 'something'
+    edges = G.out_edges(data=True)
+    if edges:
+        return sorted(edges, key=lambda edge: edge[2]['weight'], reverse=True)
+    else:
+        return False
 
 def test():
     return "success"

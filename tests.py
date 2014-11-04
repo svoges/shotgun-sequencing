@@ -94,6 +94,12 @@ def test10():
     assert superstring == "GCATCAGTG"
     print "test 10 passes"
 
+def test11():
+    graph = code.create_graph("Tests/greedy_test2.txt")
+    superstring = code.assemble_greedy(graph)
+    assert superstring == "ATGCATGCC" or superstring == "GCCATGCAT"
+    print "test 11 passes"
+
 
 if __name__ == "__main__":
     # # test to see if importing reconstruct works
@@ -132,4 +138,5 @@ if __name__ == "__main__":
     # test9()
 
     # Test full method to see if we return the string made of substrings
-    test10()
+    # test10()
+    test11()
