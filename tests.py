@@ -1,4 +1,5 @@
 import reconstruct as code
+import networkx as nx
 
 def test1():
     if code.test() == "success":
@@ -82,7 +83,14 @@ def test8():
 
 def test9():
     graph = code.create_graph("Tests/greedy_test.txt")
-    code.assemble_greedy(graph)
+    new_graph = code.assemble_greedy(graph)
+    print new_graph.number_of_nodes()
+    assert new_graph.number_of_nodes() == 3
+    assert new_graph.number_of_edges() == 3
+
+def test10():
+    graph = code.create_graph("Tests/greedy_test.txt")
+    new_graph = code.assemble_greedy(graph)
 
 
 if __name__ == "__main__":
@@ -118,5 +126,7 @@ if __name__ == "__main__":
     # Test the edge sorting method
     # test8()
 
-    # Test the assemble_greedy method
-    test9()
+    # Test the assemble_greedy method with 1 iteration
+    # test9()
+
+    # Test full method to see if we return the string made of substrings
