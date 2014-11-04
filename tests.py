@@ -70,6 +70,16 @@ def test6():
     else:
         print "TEST DOES NOT PASS!!!!"
 
+    str1 = "hello"
+    str2 = "ell"
+    distance = code.overlap_distance(str1, str2)
+    print distance
+    if distance == 0:
+        print "overlap_distance passes"
+    else:
+        print "TEST DOES NOT PASS!!!!"
+
+
 def test7():
     graph = code.create_graph("Tests/test_graph.txt")
     assert graph.number_of_edges() == 6
