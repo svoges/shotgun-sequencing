@@ -111,9 +111,12 @@ def test12():
 def reads_tester(read_file, answer_file):
     graph = code.create_graph(read_file)
     superstring = code.assemble_greedy(graph)
-    answer = open(answer_file, 'r').read().strip("\n")
-    assert len(answer) == len(superstring)
-    assert answer == superstring
+    if answer_file:
+        answer = open(answer_file, 'r').read().strip("\n")
+        assert len(answer) == len(superstring)
+        assert answer == superstring
+    else:
+        print superstring
 
 
 def test_reads1():
@@ -136,6 +139,25 @@ def test_reads5():
     print "Test 5"
     reads_tester("Dataset/reads5.txt", "Dataset/answer5.txt")
 
+def test_reads6():
+    print "Test 6"
+    reads_tester("Dataset/reads6.txt", "")
+
+def test_reads7():
+    print "Test 7"
+    reads_tester("Dataset/reads7.txt", "")
+
+def test_reads8():
+    print "Test 8"
+    reads_tester("Dataset/reads8.txt", "")
+
+def test_reads9():
+    print "Test 9"
+    reads_tester("Dataset/reads9.txt", "")
+
+def test_reads10():
+    print "Test 10"
+    reads_tester("Dataset/reads10.txt", "")
 
 
 
@@ -179,13 +201,20 @@ if __name__ == "__main__":
     # test10()
     # test11()
 
-    test12()
+    # Test to see if a read that is a substring of another read works
+    # test12()
 
-    # Test reads1 from Dataset
+    # Test reads from Dataset with answers
     test_reads1()
     test_reads2()
     test_reads3()
     test_reads4()
     test_reads5()
 
+    # Test reads from Dataset without answers
+    test_reads6()
+    test_reads7()
+    test_reads8()
+    test_reads9()
+    test_reads10()
     print "All tests pass"
