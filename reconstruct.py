@@ -50,12 +50,8 @@ def overlap(x, y):
             return True
         return False
 
-
-
-def print_nodes(graph):
-    print graph.nodes()
-
-
+# Given a graph with reads as nodes and edges weighted with the maximal overlap,
+# returns the shortest common substring between all nodes
 def assemble(graph):
     return "something"
 
