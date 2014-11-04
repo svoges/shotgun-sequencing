@@ -138,5 +138,5 @@ if __name__ == "__main__":
     # test9()
 
     # Test full method to see if we return the string made of substrings
-    # test10()
+    test10()
     test11()
