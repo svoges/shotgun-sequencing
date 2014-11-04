@@ -1,4 +1,6 @@
 import reconstruct as code
+import networkx as nx
+import matplotlib.pyplot as plt
 
 def test1():
     if code.test() == "success":
@@ -84,6 +86,7 @@ def test7():
     graph = code.create_graph("Tests/test_graph.txt")
     assert graph.number_of_edges() == 6
     assert graph.number_of_nodes() == 4
+    code.draw_graph(graph)
     print graph.out_edges(data=True)
 
 

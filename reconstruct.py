@@ -1,4 +1,5 @@
 import networkx as nx
+import matplotlib.pyplot as plt
 
 def create_graph(file):
     graph = nx.DiGraph()
@@ -13,6 +14,13 @@ def create_graph(file):
                     # graph.add_edge(read, node, weight=distance)
                     graph.add_weighted_edges_from([(read, node, distance)])
     return graph
+
+def draw_graph(graph):
+    pos=nx.spring_layout(graph)
+    nx.draw_networkx_nodes(graph, pos)
+    nx.draw_networkx_edges(graph, pos)
+    nx.draw_networkx_labels(graph, pos)
+    plt.show()
 
 
 # Returns an array of each of the fragments
