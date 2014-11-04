@@ -90,7 +90,9 @@ def test9():
 
 def test10():
     graph = code.create_graph("Tests/greedy_test.txt")
-    new_graph = code.assemble_greedy(graph)
+    superstring = code.assemble_greedy(graph)
+    assert superstring == "GCATCAGTG"
+    print "test 10 passes"
 
 
 if __name__ == "__main__":
@@ -130,3 +132,4 @@ if __name__ == "__main__":
     # test9()
 
     # Test full method to see if we return the string made of substrings
+    test10()

@@ -53,9 +53,7 @@ def overlap(x, y):
 # Given a graph with reads as nodes and edges weighted with the maximal overlap,
 # returns the shortest common substring between all nodes
 def assemble_greedy(graph):
-    test = 1
-    # while G.number_of_nodes > 1:
-    while test > 0:
+    while graph.number_of_nodes() > 1:
         edge = sort_edges(graph)[0]
         print "edge: " + str(edge) + "\n"
 
@@ -77,9 +75,6 @@ def assemble_greedy(graph):
 
         edges_into_second = graph.in_edges(nbunch=second_vertex, data=True)
         edges_outof_second = graph.out_edges(nbunch=second_vertex, data=True)
-
-        # graph.remove_node(first_vertex)
-        # graph.remove_node(second_vertex)
 
         # edges into first remain the same
         for edge in edges_into_first:
@@ -113,8 +108,7 @@ def assemble_greedy(graph):
         print graph.nodes()
         print "====Nodes after====" + "\n"
 
-        test -= 1
-    return graph
+    return graph.nodes()[0]
 
 # Returns the edge with the greatest weight
 def sort_edges(G):
