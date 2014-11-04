@@ -50,14 +50,28 @@ def overlap(x, y):
             return True
         return False
 
+# Given a graph with reads as nodes and edges weighted with the maximal overlap,
+# returns the shortest common substring between all nodes
+def assemble_greedy(graph):
+    test = 1
+    # while G.number_of_nodes > 1:
+    while test > 0:
+        edge = sort_edges(graph)[0]
+        print edge
 
+        first_vertex = edge[0]
+        second_vertex = edge[1]
+        new_vertex = first_vertex[:edge[2]['weight']*-1] + second_vertex
+        print new_vertex
 
-def print_nodes(graph):
-    print graph.nodes()
+        test -= 1
 
+# Returns the edge with the greatest weight
+def sort_edges(G):
+    return sorted(G.out_edges(data=True), key=lambda edge: edge[2]['weight'], reverse=True)
 
-def assemble(graph):
-    return "something"
+def shortest_substring(x, y):
+    return 'something'
 
 def test():
     return "success"

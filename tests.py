@@ -76,33 +76,47 @@ def test7():
     assert graph.number_of_nodes() == 4
     print graph.out_edges(data=True)
 
+def test8():
+    graph = code.create_graph("Tests/test_graph.txt")
+    print code.sort_edges(graph)
+
+def test9():
+    graph = code.create_graph("Tests/greedy_test.txt")
+    code.assemble_greedy(graph)
+
 
 if __name__ == "__main__":
-    # test to see if importing reconstruct works
-    print "----Test 1----"
-    test1()
-
-    # test to see if python reads the file correctly
-    print "----Test 2----"
-    test2()
-
-    # test to see if nodes are being added to the graph correctly
-    print "----Test 3----"
-    test3()
-
-    # Test error checking in read_file
-    print "---Test 4----"
-    print "Should print 'File was not able to be read'"
-    test4()
-
-    # Test the overlap function in reconstruct
-    print "----Test 5----"
-    test5()
-
-    # Test that the overlap_distance is correct
-    print "----Test 6----"
-    test6()
+    # # test to see if importing reconstruct works
+    # print "----Test 1----"
+    # test1()
     #
-    # Test that the graph is correctly made
-    print "----Test 7----"
-    test7()
+    # # test to see if python reads the file correctly
+    # print "----Test 2----"
+    # test2()
+    #
+    # # test to see if nodes are being added to the graph correctly
+    # print "----Test 3----"
+    # test3()
+    #
+    # # Test error checking in read_file
+    # print "---Test 4----"
+    # print "Should print 'File was not able to be read'"
+    # test4()
+    #
+    # # Test the overlap function in reconstruct
+    # print "----Test 5----"
+    # test5()
+    #
+    # # Test that the overlap_distance is correct
+    # print "----Test 6----"
+    # test6()
+    #
+    # # Test that the graph is correctly made
+    # print "----Test 7----"
+    # test7()
+    #
+    # Test the edge sorting method
+    # test8()
+
+    # Test the assemble_greedy method
+    test9()
