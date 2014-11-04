@@ -100,6 +100,35 @@ def test11():
     assert superstring == "ATGCATGCC" or superstring == "GCCATGCAT"
     print "test 11 passes"
 
+def reads_tester(read_file, answer_file):
+    graph = code.create_graph(read_file)
+    superstring = code.assemble_greedy(graph)
+    answer = open(answer_file, 'r').read().strip("\n")
+    assert len(answer) == len(superstring)
+    assert answer == superstring
+
+
+def test_reads1():
+    print "Test 1"
+    reads_tester("Dataset/reads1.txt", "Dataset/answer1.txt")
+
+def test_reads2():
+    print "Test 2"
+    reads_tester("Dataset/reads2.txt", "Dataset/answer2.txt")
+
+def test_reads3():
+    print "Test 3"
+    reads_tester("Dataset/reads3.txt", "Dataset/answer3.txt")
+
+def test_reads4():
+    print "Test 4"
+    reads_tester("Dataset/reads4.txt", "Dataset/answer4.txt")
+
+def test_reads5():
+    print "Test 5"
+    reads_tester("Dataset/reads5.txt", "Dataset/answer5.txt")
+
+
 
 if __name__ == "__main__":
     # # test to see if importing reconstruct works
@@ -138,5 +167,14 @@ if __name__ == "__main__":
     # test9()
 
     # Test full method to see if we return the string made of substrings
-    test10()
-    test11()
+    # test10()
+    # test11()
+
+    # Test reads1 from Dataset
+    test_reads1()
+    test_reads2()
+    test_reads3()
+    test_reads4()
+    test_reads5()
+
+    print "All tests pass"

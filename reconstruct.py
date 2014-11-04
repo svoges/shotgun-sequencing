@@ -53,33 +53,36 @@ def overlap(x, y):
 
 # Given a graph with reads as nodes and edges weighted with the maximal overlap,
 # returns the shortest common substring between all nodes
-def assemble_greedy(graph):
+def assemble_greedy(graph, printing=False):
     while graph.number_of_nodes() > 1:
         edge = sort_edges(graph)
         if not edge:
             print "ATTENTION: THIS SHOULD NOT HAPPEN"
         else:
             edge = edge[0]
-            print "edge: " + str(edge) + "\n"
+            if printing:
+                print "edge: " + str(edge) + "\n"
 
             first_vertex = edge[0]
             second_vertex = edge[1]
-            print "first vertex: " + first_vertex
-            print "second vertex: " + second_vertex
+            if printing:
+                print "first vertex: " + first_vertex
+                print "second vertex: " + second_vertex
 
             if edge[2]["weight"] == 0:
                 new_vertex = first_vertex + second_vertex
             else:
                 new_vertex = first_vertex[:edge[2]['weight']*-1] + second_vertex
-            print "new_vertex: " +  new_vertex + "\n"
+            if printing:
+                print "new_vertex: " +  new_vertex + "\n"
 
-            print "====Edges before===="
-            print graph.out_edges(data=True)
-            print "====Edges before====" + "\n"
+                print "====Edges before===="
+                print graph.out_edges(data=True)
+                print "====Edges before====" + "\n"
 
-            print "====Nodes before===="
-            print graph.nodes()
-            print "====Nodes before====" + "\n"
+                print "====Nodes before===="
+                print graph.nodes()
+                print "====Nodes before====" + "\n"
 
             edges_into_first = graph.in_edges(nbunch=first_vertex, data=True)
             edges_outof_first = graph.out_edges(nbunch=first_vertex, data=True)
@@ -111,13 +114,14 @@ def assemble_greedy(graph):
                     if new_distance >= 0:
                         graph.add_weighted_edges_from([(edge[0], new_vertex, new_distance)])
 
-            print "====Edges after===="
-            print graph.out_edges(data=True)
-            print "====Edges after====" + "\n"
+            if printing:
+                print "====Edges after===="
+                print graph.out_edges(data=True)
+                print "====Edges after====" + "\n"
 
-            print "====Nodes after===="
-            print graph.nodes()
-            print "====Nodes after====" + "\n"
+                print "====Nodes after===="
+                print graph.nodes()
+                print "====Nodes after====" + "\n"
 
     return graph.nodes()[0]
 
