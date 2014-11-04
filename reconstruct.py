@@ -11,7 +11,6 @@ def create_graph(file):
                 x_index = max(0, len(read) - len(node))
                 distance = overlap_distance(read[x_index:], node)
                 if distance >= 0:
-                    # graph.add_edge(read, node, weight=distance)
                     graph.add_weighted_edges_from([(read, node, distance)])
     return graph
 
@@ -108,7 +107,8 @@ def assemble_greedy(graph, printing=False):
 
             for edge in edges_into_second:
                 if edge[0] in new_vertex:
-                    graph.remove_node(edge[0])
+                    if edge[0] in graph.nodes():
+                        graph.remove_node(edge[0])
                 else:
                     new_distance = overlap_distance(edge[0], new_vertex)
                     if new_distance >= 0:

@@ -100,6 +100,14 @@ def test11():
     assert superstring == "ATGCATGCC" or superstring == "GCCATGCAT"
     print "test 11 passes"
 
+# The code seems to be breaking when a read is the substring of another read. Let's test this out!
+def test12():
+    graph = code.create_graph("Tests/substring.txt")
+    superstring = code.assemble_greedy(graph, printing=True)
+    assert superstring == "ACCGGTTA"
+    print "test 12 passes"
+
+
 def reads_tester(read_file, answer_file):
     graph = code.create_graph(read_file)
     superstring = code.assemble_greedy(graph)
@@ -127,6 +135,7 @@ def test_reads4():
 def test_reads5():
     print "Test 5"
     reads_tester("Dataset/reads5.txt", "Dataset/answer5.txt")
+
 
 
 
@@ -169,6 +178,8 @@ if __name__ == "__main__":
     # Test full method to see if we return the string made of substrings
     # test10()
     # test11()
+
+    test12()
 
     # Test reads1 from Dataset
     test_reads1()
