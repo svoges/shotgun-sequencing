@@ -1,5 +1,6 @@
 import reconstruct as code
 import networkx as nx
+import time
 
 def test1():
     if code.test() == "success":
@@ -109,16 +110,19 @@ def test12():
 
 
 def reads_tester(read_file, answer_file, output_file):
+    start = time.time()
     graph = code.create_graph(read_file)
     superstring = code.assemble_greedy(graph, output_file)
+    end = time.time()
     if answer_file:
         answer = open(answer_file).read()
         output = open(output_file).read()
         assert answer == output
-        # answer = open(answer_file, 'r').read().strip("\n")
-        # assert len(answer) == len(superstring)
-        # assert answer == superstring
-
+    else:
+        print "There is no answer file \n"
+        print superstring
+        print "\n"
+    print "Time: " + str(end - start) + "\n"
 
 def test_reads1():
     print "Test 1"
@@ -159,6 +163,31 @@ def test_reads9():
 def test_reads10():
     print "Test 10"
     reads_tester("Dataset/reads10.txt", "", "Output/output10.txt")
+
+def test_reads11():
+    print "Test 11"
+    reads_tester("Dataset/reads11.txt", "", "Output/output11.txt")
+
+def test_reads12():
+    print "Test 12"
+    reads_tester("Dataset/reads12.txt", "", "Output/output12.txt")
+
+def test_reads13():
+    print "Test 13"
+    reads_tester("Dataset/reads13.txt", "", "Output/output13.txt")
+
+def test_reads14():
+    print "Test 14"
+    reads_tester("Dataset/reads14.txt", "", "Output/output14.txt")
+
+def test_reads15():
+    print "Test 15"
+    reads_tester("Dataset/reads15.txt", "", "Output/output15.txt")
+
+def test_reads16():
+    print "Test 16"
+    reads_tester("Dataset/reads16.txt", "", "Output/output16.txt")
+
 
 
 
@@ -218,4 +247,10 @@ if __name__ == "__main__":
     test_reads8()
     test_reads9()
     test_reads10()
+    test_reads11()
+    test_reads12()
+    test_reads13()
+    test_reads14()
+    test_reads15()
+    test_reads16()
     print "All tests pass"
