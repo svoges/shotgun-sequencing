@@ -91,7 +91,7 @@ def test9():
 
 def test10():
     graph = code.create_graph("Tests/greedy_test.txt")
-    superstring = code.assemble_greedy(graph)
+    superstring = code.assemble_greedy(graph, "Output/test10.txt")
     assert superstring == "GCATCAGTG"
     print "test 10 passes"
 
@@ -119,10 +119,11 @@ def reads_tester(read_file, answer_file, output_file):
         output = open(output_file).read()
         assert answer == output
     else:
-        print "There is no answer file \n"
-        print superstring
-        print "\n"
-    print "Time: " + str(end - start) + "\n"
+        print "There is no answer file"
+        # print superstring
+        # print "\n"
+    # print "Time: " + str(end - start) + "\n"
+    print "n: " + str(len(superstring)) + "\n"
 
 def test_reads1():
     print "Test 1"
@@ -228,29 +229,29 @@ if __name__ == "__main__":
     # test9()
 
     # Test full method to see if we return the string made of substrings
-    # test10()
+    test10()
     # test11()
 
     # Test to see if a read that is a substring of another read works
     # test12()
 
     # Test reads from Dataset with answers
-    test_reads1()
-    test_reads2()
-    test_reads3()
-    test_reads4()
-    test_reads5()
-
-    # Test reads from Dataset without answers
-    test_reads6()
-    test_reads7()
-    test_reads8()
-    test_reads9()
-    test_reads10()
-    test_reads11()
-    test_reads12()
-    test_reads13()
-    test_reads14()
-    test_reads15()
-    test_reads16()
+    # test_reads1()
+    # test_reads2()
+    # test_reads3()
+    # test_reads4()
+    # test_reads5()
+    #
+    # # Test reads from Dataset without answers
+    # test_reads6()
+    # test_reads7()
+    # test_reads8()
+    # test_reads9()
+    # test_reads10()
+    # test_reads11()
+    # test_reads12()
+    # test_reads13()
+    # test_reads14()
+    # test_reads15()
+    # test_reads16()
     print "All tests pass"

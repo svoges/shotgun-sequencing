@@ -1,10 +1,10 @@
 import networkx as nx
-from time import sleep
+import time
+import Queue
 
 def create_graph(file):
     graph = nx.DiGraph()
     reads = read_file(file)
-    # graph.add_nodes_from(reads)
     for read in reads:
         for node in reads:
             if read != node:
@@ -24,6 +24,7 @@ def read_file(file):
         fragments.append(line)
     if not fragments:
         print "File was not able to be read"
+    # print "k: " + str(len(fragments))
     return fragments
 
 def overlap_distance(x, y):
@@ -53,25 +54,38 @@ def overlap(x, y):
 # Given a graph with reads as nodes and edges weighted with the maximal overlap,
 # returns the shortest common substring between all nodes
 def assemble_greedy(graph, output, printing=False):
+    q = Queue.PriorityQueue()
+    all_edges = graph.out_edges(data=True)
+    # turn each edge into a Edge class and put it into the priority queue
+    for edge in all_edges:
+        q.put(Edge(edge[2]['weight'], edge[0], edge[1]))
+
     while graph.number_of_nodes() > 1:
-        edge = sort_edges(graph)
+        # while not q.empty():
+        #     next_v = q.get()
+        #     print str(str(next_v.weight) + ", " + next_v.first_vertex + ", " + next_v.second_vertex)
+        # print "\n"
+
+        # start_sort = time.time()
+        # edge = sort_edges(graph)
+        # end_sort = time.time()
+        # print str(end_sort - start_sort)
+        edge = q.get()
+
         if not edge:
             print "ATTENTION: THIS SHOULD NOT HAPPEN"
         else:
-            edge = edge[0]
-            if printing:
-                print "edge: " + str(edge) + "\n"
-
-            first_vertex = edge[0]
-            second_vertex = edge[1]
+            first_vertex = edge.first_vertex
+            second_vertex = edge.second_vertex
+            weight = edge.weight
             if printing:
                 print "first vertex: " + first_vertex
                 print "second vertex: " + second_vertex
 
-            if edge[2]["weight"] == 0:
+            if weight == 0:
                 new_vertex = first_vertex + second_vertex
             else:
-                new_vertex = first_vertex[:edge[2]['weight']*-1] + second_vertex
+                new_vertex = first_vertex[:weight*-1] + second_vertex
             if printing:
                 print "new_vertex: " +  new_vertex + "\n"
 
@@ -90,29 +104,32 @@ def assemble_greedy(graph, output, printing=False):
             edges_outof_second = graph.out_edges(nbunch=second_vertex, data=True)
 
             # edges into first remain the same
-            for edge in edges_into_first:
-                graph.add_weighted_edges_from([(edge[0], new_vertex, edge[2]['weight'])])
+            for in_edge in edges_into_first:
+                graph.add_weighted_edges_from([(in_edge[0], new_vertex, in_edge[2]['weight'])])
+                q.put(Edge(in_edge[2]['weight'], in_edge[0], new_vertex))
 
-            for edge in edges_outof_first:
-                if edge[1] in new_vertex:
-                    graph.remove_node(edge[1])
+
+            for out_edge in edges_outof_first:
+                if out_edge[1] in new_vertex:
+                    graph.remove_node(out_edge[1])
+
                 else:
-                    new_distance = overlap_distance(new_vertex, edge[1])
+                    new_distance = overlap_distance(new_vertex, out_edge[1])
                     if new_distance >= 0:
-                        graph.add_weighted_edges_from([(new_vertex, edge[1], new_distance)])
+                        graph.add_weighted_edges_from([(new_vertex, out_edge[1], new_distance)])
 
             # edges out of second remain the same
-            for edge in edges_outof_second:
-                graph.add_weighted_edges_from([(new_vertex, edge[1], edge[2]['weight'])])
+            for out_edge in edges_outof_second:
+                graph.add_weighted_edges_from([(new_vertex, out_edge[1], out_edge[2]['weight'])])
 
-            for edge in edges_into_second:
-                if edge[0] in new_vertex:
-                    if edge[0] in graph.nodes():
-                        graph.remove_node(edge[0])
+            for in_edge in edges_into_second:
+                if in_edge[0] in new_vertex:
+                    if in_edge[0] in graph.nodes():
+                        graph.remove_node(in_edge[0])
                 else:
-                    new_distance = overlap_distance(edge[0], new_vertex)
+                    new_distance = overlap_distance(in_edge[0], new_vertex)
                     if new_distance >= 0:
-                        graph.add_weighted_edges_from([(edge[0], new_vertex, new_distance)])
+                        graph.add_weighted_edges_from([(in_edge[0], new_vertex, new_distance)])
 
             if printing:
                 print "====Edges after===="
@@ -137,3 +154,13 @@ def sort_edges(G):
 
 def test():
     return "success"
+
+class Edge(object):
+    def __init__(self, weight, first_vertex, second_vertex):
+        self.weight = weight
+        self.first_vertex = first_vertex
+        self.second_vertex = second_vertex
+        return
+
+    def __cmp__(self, other):
+        return cmp(other.weight, self.weight)
