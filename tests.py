@@ -97,7 +97,7 @@ def test10():
 
 def test11():
     graph = code.create_graph("Tests/greedy_test2.txt")
-    superstring = code.assemble_greedy(graph, "Output/test11.txt")
+    superstring = code.assemble_greedy(graph, "Output/test11.txt", printing=True)
     assert superstring == "ATGCATGCC" or superstring == "GCCATGCAT"
     print "test 11 passes"
 
@@ -229,7 +229,7 @@ if __name__ == "__main__":
     # test9()
 
     # Test full method to see if we return the string made of substrings
-    test10()
+    # test10()
     test11()
 
     # Test to see if a read that is a substring of another read works
