@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,textcomp,amssymb,geometry,graphicx,enumerate}
+
+\def\Name{Steffan Voges}  % Your name
+\def\SID{23434518}  % Your student ID number
+\def\Login{cs170-cz} % Your login (your class account, cs170-xy)
+\def\Homework{9}%Number of Homework
+\def\Session{Fall 2014}
+
+
+\title{CS170--Fall 2014 --- Solutions to Homework \Homework}
+\author{\Name, SID \SID, \texttt{\Login}}
+\markboth{CS170--\Session\  Homework \Homework\ \Name}{CS170--\Session\ Homework \Homework\ \Name, \texttt{\Login}}
+\pagestyle{myheadings}
+
+\newenvironment{qparts}{\begin{enumerate}[{(}a{)}]}{\end{enumerate}}
+\def\endproofmark{$\Box$}
+\newenvironment{proof}{\par{\bf Proof}:}{\endproofmark\smallskip}
+
+\textheight=9in
+\textwidth=6.5in
+\topmargin=-.75in
+\oddsidemargin=0.25in
+\evensidemargin=0.25in
+
+
+\begin{document}
+\maketitle
+
+\noindent
+Collaborators: Ryan Flynn
+
+
+\section*{1. Subsequence}
+\noindent
+\textbf{Main idea.}
+Create a directed graph with each read represented as a node.  There exists an edge between a node $a$ and another node $b$ if the suffix of node $a$ overlaps with the prefix of node $b$, with the weight of the graph labeled as the length of the overlap between the two reads.  Then, use a greedy algorithm to reduce the graph down to one node.  Select the edge with the greatest weight, merge the two nodes together, and adjust the corresponding edges.  Repeat the process until you are left with only 1 node, which you select as your superstring. \\
+
+\noindent \textbf{Pseudocode.} \\
+def create\_graph(reads):\\
+\indent for read in reads: \\
+\indent\indent for node in reads: \\
+\indent\indent\indent distance = overlap\_distance(read, node) \\
+\indent\indent\indent graph.add\_weighted\_edge(read, node, distance) \\
+\indent return graph\\
+
+\noindent def assemble(graph):\\
+\indent while graph.nodes() $>$ 1: \\
+\indent\indent edge = maximum edge in graph \\
+\indent\indent new\_vertex = edge[0] + edge[1] \\
+\indent\indent add new\_vertex to graph \\
+\indent\indent align edges previously connected to edge[0] and edge[1] to new\_vertex \\
+\indent return graph.nodes()\\
+
+\noindent def overlap\_distance(x, y): \\
+\indent return overlap between suffix of x and prefix of y \\
+
+\noindent\textbf{Run time.} $O(n^3k^2)$\\
+
+\noindent\textbf{Analysis of Runtime.} Overlap\_distance takes $O(k^2)$ since at worst, we compare every character in x to every character in y.  Create graph will then take $O(n^2k^2)$ time- for each node, we look at the overlap distance to every other node.  Next, we look at assemble.  We look at only $n$ nodes since at each step, we merge two nodes together.  To pick the maximum node takes $O(log n)$ time when using a priority queue to keep record of the edges.  We then take $4n^2k^2$ time to re-align all of the edges previously coming in and out of both the first and second vertex.  Since we run create\_graph and assemble only once, our algorithm runs in $O(n^2k^2 + n log n + 4n^3k^2) = O(n^3k^2)$
+
+
+\end{document}
