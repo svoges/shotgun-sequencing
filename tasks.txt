@@ -1,0 +1,3 @@
+Implement Priority queue instead of sorting every time
+
+Change overlap method to go from back to front instead of front to back
